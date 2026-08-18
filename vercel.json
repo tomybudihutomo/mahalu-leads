@@ -1,4 +1,12 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "alias": ["mahalu-app.vercel.app"],
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "mahalu-app.vercel.app" }],
+      "destination": "/portal/index.html"
+    }
+  ]
 }
