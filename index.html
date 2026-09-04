@@ -1,63 +1,243 @@
 <!doctype html>
 <html lang="id">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Mahalu Leads</title>
-<link rel="stylesheet" href="/style.css">
-
-</head>
-<body>
-<div id="login" class="login">
-  <div class="login-card">
-    <div class="brand"><div class="mark">M</div><div><h1>Mahalu Leads</h1><p>Front Desk & Marketing CRM</p></div></div>
-    <div class="field"><label>Email</label><input id="email" type="email"/></div>
-    <div class="field"><label>Password</label><input id="password" type="password"/></div>
-    <button id="loginBtn" class="btn btn-primary btn-full">Masuk</button>
-    <div id="loginError" class="error hidden"></div>
-  </div>
-</div>
-<div id="app" class="app hidden">
-  <aside class="side">
-    <div class="brand"><div class="mark">M</div><div><h1>Mahalu Leads</h1><p>Internal CRM</p></div></div>
-    <div class="nav">
-      <button data-section="dashboard" class="active">⌂ <span>Dashboard</span></button>
-      <button data-section="leads">☷ <span>Semua Leads</span></button>
-      <button data-section="followup">↻ <span>Follow Up</span></button>
-      <button data-section="ads">◎ <span>Ad Spend</span></button>
-      <button data-section="reports">▤ <span>Reports</span></button>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Mahalu Leads</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div id="login" class="login">
+      <div class="login-card">
+        <div class="brand">
+          <div class="mark">M</div>
+          <div>
+            <h1>Mahalu Leads</h1>
+            <p>Front Desk & Marketing CRM</p>
+          </div>
+        </div>
+        <div class="field">
+          <label>Email</label><input id="email" type="email" />
+        </div>
+        <div class="field">
+          <label>Password</label><input id="password" type="password" />
+        </div>
+        <button id="loginBtn" class="btn btn-primary btn-full">Masuk</button>
+        <div id="loginError" class="error hidden"></div>
+      </div>
     </div>
-    <div class="side-footer"><button id="logoutBtn" class="btn btn-secondary btn-full">⇥ <span>Keluar</span></button></div>
-  </aside>
-  <main class="main">
-    <section id="dashboard" class="section active">
-      <div class="top"><div><h2>Dashboard Leads</h2><p>Ringkasan performa lead Mahalu Spa.</p></div><div class="top-actions"><input id="dashFrom" type="date"/><input id="dashTo" type="date"/><button class="btn btn-secondary" id="refreshBtn">Refresh</button><button class="btn btn-primary" id="newLeadBtn">+ Tambah Lead</button></div></div>
-      <div id="kpis" class="grid-kpi"></div>
-      <div class="two"><div class="panel"><h3>Performa Sumber Lead</h3><div id="sourceTable"></div></div><div class="panel"><h3>Alasan Tidak Deal</h3><div id="lostReasons" class="barlist"></div></div></div>
-      <div class="panel" style="margin-top:14px"><h3>Lead Terbaru</h3><div id="recentLeads"></div></div>
-    </section>
-    <section id="leads" class="section">
-      <div class="top"><div><h2>Semua Leads</h2><p>Input dan edit langsung di tabel. Tidak ada popup.</p></div><button class="btn btn-primary" id="newLeadBtn2">+ Tambah Baris</button></div>
-      <div class="panel"><div class="toolbar"><input id="searchLead" placeholder="Cari nama / nomor..."/><select id="filterStatus"><option value="">Semua status</option><option value="new">Baru</option><option value="replied">Sudah Dibalas</option><option value="follow_up">Follow Up</option><option value="deal">Deal</option><option value="lost">Tidak Deal</option></select><select id="filterSource"><option value="">Semua sumber</option><option value="instagram_lama">IG Lama</option><option value="instagram_baru">IG Baru</option><option value="tiktok">TikTok</option><option value="walk_in">Walk-in</option></select></div><div id="allLeads"></div></div>
-    </section>
-    <section id="followup" class="section">
-      <div class="top"><div><h2>Follow Up</h2><p>Lead yang perlu dihubungi kembali.</p></div></div>
-      <div class="panel"><div id="followupLeads"></div></div>
-    </section>
-    <section id="ads" class="section">
-      <div class="top"><div><h2>Ad Spend</h2><p>Catat biaya iklan manual per akun dan campaign.</p></div><button class="btn btn-primary" id="newSpendBtn">+ Input Ad Spend</button></div>
-      <div class="grid-kpi" id="adKpis"></div><div class="panel"><div id="adTable"></div></div>
-    </section>
-    <section id="reports" class="section">
-      <div class="top"><div><h2>Reports</h2><p>Conversion, biaya lead dan hasil campaign.</p></div></div>
-      <div class="panel"><h3>Campaign Performance</h3><div id="campaignReport"></div></div>
-    </section>
-  </main>
-</div>
-<div id="spendModal" class="modal-bg hidden"><div class="modal"><div class="modal-head"><h3>Input Ad Spend</h3><button class="x" data-close="spendModal">×</button></div><form id="spendForm"><div class="form-grid"><div class="field"><label>Tanggal *</label><input id="spendDate" type="date" required/></div><div class="field"><label>Akun *</label><select id="spendAccount"><option value="instagram_lama">Instagram Lama</option><option value="instagram_baru">Instagram Baru</option></select></div><div class="field"><label>Campaign *</label><input id="spendCampaign" required/></div><div class="field"><label>Spend *</label><input id="spendValue" type="number" min="0" required/></div><div class="field span2"><label>Catatan</label><textarea id="spendNotes"></textarea></div></div><div class="actions"><button type="button" class="btn btn-secondary" data-close="spendModal">Batal</button><button class="btn btn-primary">Simpan</button></div></form></div></div>
-<script src="/auth.js"></script>
-<script src="/app1.js"></script>
-<script src="/app2.js"></script>
-<script src="/app3.js"></script>
-</body>
+    <div id="app" class="app hidden">
+      <aside class="side">
+        <div class="brand">
+          <div class="mark">M</div>
+          <div>
+            <h1>Mahalu Leads</h1>
+            <p>Internal CRM</p>
+          </div>
+        </div>
+        <div class="nav">
+          <button data-section="dashboard" class="active">
+            ⌂ <span>Dashboard</span>
+          </button>
+          <button data-section="leads">☷ <span>Semua Leads</span></button>
+          <button data-section="followup">↻ <span>Follow Up</span></button>
+          <button data-section="ads">◎ <span>Ad Spend</span></button>
+          <button data-section="reports">▤ <span>Reports</span></button>
+        </div>
+        <div class="side-footer">
+          <button id="logoutBtn" class="btn btn-secondary btn-full">
+            ⇥ <span>Keluar</span>
+          </button>
+        </div>
+      </aside>
+      <main class="main">
+        <section id="dashboard" class="section active">
+          <div class="top">
+            <div>
+              <h2>Dashboard Leads</h2>
+              <p>Ringkasan performa lead Mahalu Spa.</p>
+            </div>
+            <div class="top-actions">
+              <input id="dashFrom" type="date" /><input
+                id="dashTo"
+                type="date"
+              /><button class="btn btn-secondary" id="refreshBtn">
+                Refresh</button
+              ><button class="btn btn-primary" id="newLeadBtn">
+                + Tambah Lead
+              </button>
+            </div>
+          </div>
+          <div id="kpis" class="grid-kpi"></div>
+          <div class="two">
+            <div class="panel">
+              <h3>Performa Sumber Lead</h3>
+              <div id="sourceTable"></div>
+            </div>
+            <div class="panel">
+              <h3>Alasan Tidak Deal</h3>
+              <div id="lostReasons" class="barlist"></div>
+            </div>
+          </div>
+          <div class="panel" style="margin-top: 14px">
+            <h3>Lead Terbaru</h3>
+            <div id="recentLeads"></div>
+          </div>
+        </section>
+        <section id="leads" class="section">
+          <div class="top">
+            <div>
+              <h2>Semua Leads</h2>
+              <p>Input, edit, dan hapus langsung di tabel.</p>
+            </div>
+            <button class="btn btn-primary" id="newLeadBtn2">
+              + Tambah Baris
+            </button>
+          </div>
+          <div class="panel">
+            <div class="toolbar">
+              <input
+                id="searchLead"
+                placeholder="Cari nama / nomor..."
+              /><select id="filterStatus">
+                <option value="">Semua status</option>
+                <option value="new">Baru</option>
+                <option value="replied">Sudah Dibalas</option>
+                <option value="follow_up">Follow Up</option>
+                <option value="deal">Deal</option>
+                <option value="lost">Tidak Deal</option></select
+              ><select id="filterSource">
+                <option value="">Semua sumber</option>
+                <option value="instagram_lama">IG Lama</option>
+                <option value="instagram_baru">IG Baru</option>
+                <option value="tiktok">TikTok</option>
+                <option value="walk_in">Walk-in</option></select
+              ><label class="filter-date"
+                >Dari <input id="leadFrom" type="date" /></label
+              ><label class="filter-date"
+                >Sampai <input id="leadTo" type="date"
+              /></label>
+            </div>
+            <div id="allLeads"></div>
+          </div>
+        </section>
+        <section id="followup" class="section">
+          <div class="top">
+            <div>
+              <h2>Follow Up</h2>
+              <p>Lead yang perlu dihubungi kembali.</p>
+            </div>
+          </div>
+          <div class="panel"><div id="followupLeads"></div></div>
+        </section>
+        <section id="ads" class="section">
+          <div class="top">
+            <div>
+              <h2>Ad Spend</h2>
+              <p>Catat biaya iklan manual per akun dan campaign.</p>
+            </div>
+            <button class="btn btn-primary" id="newSpendBtn">
+              + Input Ad Spend
+            </button>
+          </div>
+          <div class="grid-kpi" id="adKpis"></div>
+          <div class="panel"><div id="adTable"></div></div>
+        </section>
+        <section id="reports" class="section">
+          <div class="top">
+            <div>
+              <h2>Reports</h2>
+              <p>Conversion, biaya lead dan hasil campaign.</p>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Campaign Performance</h3>
+            <div id="campaignReport"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div id="spendModal" class="modal-bg hidden">
+      <div class="modal">
+        <div class="modal-head">
+          <h3>Input Ad Spend</h3>
+          <button class="x" data-close="spendModal">×</button>
+        </div>
+        <form id="spendForm">
+          <div class="form-grid">
+            <div class="field">
+              <label>Tanggal *</label
+              ><input id="spendDate" type="date" required />
+            </div>
+            <div class="field">
+              <label>Akun *</label
+              ><select id="spendAccount">
+                <option value="instagram_lama">Instagram Lama</option>
+                <option value="instagram_baru">Instagram Baru</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Campaign *</label><input id="spendCampaign" required />
+            </div>
+            <div class="field">
+              <label>Spend *</label
+              ><input id="spendValue" type="number" min="0" required />
+            </div>
+            <div class="field span2">
+              <label>Catatan</label><textarea id="spendNotes"></textarea>
+            </div>
+          </div>
+          <div class="actions">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-close="spendModal"
+            >
+              Batal</button
+            ><button class="btn btn-primary">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="deleteLeadModal" class="modal-bg hidden">
+      <div
+        class="modal confirm-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="deleteLeadTitle"
+      >
+        <div class="confirm-icon" aria-hidden="true">!</div>
+        <div class="modal-head">
+          <h3 id="deleteLeadTitle">Hapus lead?</h3>
+          <button class="x" aria-label="Tutup" onclick="closeDeleteLead()">
+            ×
+          </button>
+        </div>
+        <p class="confirm-text">
+          Anda akan menghapus lead <strong id="deleteLeadName"></strong>. Data
+          ini tidak dapat dipulihkan.
+        </p>
+        <div class="actions">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="closeDeleteLead()"
+          >
+            Batal</button
+          ><button
+            id="confirmDeleteLeadBtn"
+            type="button"
+            class="btn btn-danger"
+            onclick="confirmDeleteLead()"
+          >
+            Hapus lead
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="/auth.js"></script>
+    <script src="/app1.js"></script>
+    <script src="/app2.js"></script>
+    <script src="/app3.js"></script>
+  </body>
 </html>
